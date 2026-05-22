@@ -1,0 +1,7 @@
+Week,Category,KPI_Value,Unit
+Week1,Warehouse,12,percent_improvement
+Week2,Delivery,94,success_rate
+Week3,Inventory,98.5,accuracy
+Week4,Cross-docking,87,utilization
+Week5,Fleet,12,cost_reduction
+Week6,Returns,60,speed_improvement
