@@ -3,6 +3,15 @@ import pandas as pd
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
+import time
+import threading
+
+def keep_alive():
+    while True:
+        time.sleep(600)  # ping every 10 minutes
+
+thread = threading.Thread(target=keep_alive, daemon=True)
+thread.start()
 
 load_dotenv()
 
@@ -83,6 +92,15 @@ if uploaded_file:
     if st.button("🗑️ Clear chat"):
         st.session_state.messages = []
         st.rerun()
+        
+    if "request_count" not in st.session_state:
+        st.session_state.request_count = 0
+
+    if st.session_state.request_count > 20:
+        st.error("Request limit reached. Please refresh.")
+        st.stop()
+
+    st.session_state.request_count += 1
 
 else:
     st.info("👆 Upload a CSV file to get started!")
